@@ -1,0 +1,80 @@
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__header {
+        font-size: 1.2rem;
+        border-bottom: 2px solid var(--accent4);
+    }
+
+    td{
+        padding-block: 0.5rem;
+    text-align: center;
+    }
+}
+
+.user {
+    &_image {
+        font-size: 5rem;
+        overflow: hidden;
+        display: inline-block;
+        width: 0.7em;
+        height: 0.7em;
+        border-radius: 50%;
+        border: 3.5px solid #000;
+        background-color: gray;
+        vertical-align: middle;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+    }
+
+    &_name {
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &_row {
+        &:not(:last-child) {
+            border-bottom: 2px solid #000;
+        }
+
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+    }
+    &_actions{
+        width: fit-content;
+    }
+}
+.actions-container{
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px;
+    width: fit-content;
+
+    button{
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            background-color: var(--accent);
+
+            i{
+                color: #fff;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.select {
+    .article {
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            /* Ancho de la imagen */
+            height: 150px;
+            /* Alto de la imagen */
+            background-image: url('../assets/icons/cruz.svg');
+            /* Ruta de la imagen */
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0;
+            /* Oculta la imagen por defecto */
+            transform: translate(-50%, -50%);
+            /* Centra la imagen en el contenedor */
+            transition: opacity 0.3s ease;
+            /* Transición suave para la aparición */
+        }
+
+        &:hover::before {
+            opacity: 1;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.socialAuthOptions {
+    display: flex;
+    gap: 0.5rem;
+
+    .socialAuth {
+        flex-grow: 1;
+
+        &:hover {
+            i {
+                color: white;
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.dialog{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: unset;
+    border:  unset;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    justify-content: center;
+
+    &[open]{
+        display: flex;
+    }
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        max-width: 35%;
+    }
+
+    &__close{
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 0.5rem 0.6rem;
+        max-width: fit-content;
+        align-self: flex-end;
+    }
+}
