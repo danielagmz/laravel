@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\users;
 
 use Illuminate\Http\Request;
 
-class dashboardController extends Controller
+class dashboardController
 {
     public function index()
     {

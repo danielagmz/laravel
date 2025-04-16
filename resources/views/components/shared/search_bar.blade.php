@@ -14,9 +14,7 @@
             <option aria-label="12 articulos por pagina" value="12">12</option>
             <option aria-label="16 articulos por pagina" value="16">16</option>
         </select>
-        <div class="paginacion">
-            <div class="paginacion__links"></div>
-        </div>
+        <div class="paginacion">{!! $links !!}</div>
         <div class="cabeceras--ordenacion ordenacion">
             <fieldset class=" content_subtitle content__body--row">
                 <legend hidden>Ordenar</legend>

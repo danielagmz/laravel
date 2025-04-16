@@ -10,9 +10,7 @@
         @if ($anonymous)
         <span class="article__updated"><i class="fi fi-rr-edit icon"></i>{{ $article->updated_at }}</span>
         @else
-        <span class="article__author"><i class="fi fi-rr-user icon"></i>{{ $article->user->username }}</span>
+        <span class="article__author"><i class="fi fi-rr-user icon"></i>{{ $article->author->username }}</span>
         @endif
-
-        
     </div>  
 </article>

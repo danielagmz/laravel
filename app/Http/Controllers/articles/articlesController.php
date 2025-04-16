@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\articles;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class articlesController 
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public static function all()
     {
-        $articles = Article::all();
+        $articles = Article::with('author')->paginate(4);
         return $articles;
     }
 

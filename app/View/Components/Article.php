@@ -9,12 +9,14 @@ use Illuminate\View\Component;
 class Article extends Component
 {
     public $article;
+    public $anonymous = false;
     /**
      * Create a new component instance.
      */
     public function __construct($article)
     {
         $this->article = $article;
+
     }
 
     /**

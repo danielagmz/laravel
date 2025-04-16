@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
-class adminController extends Controller
+class adminController
 {
     public function index(){
         return view('admin.index');

@@ -1,21 +1,19 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\shared;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class search_bar extends Component
-
+class pagination extends Component
 {
-    public $links;
     /**
      * Create a new component instance.
      */
-    public function __construct($links)
+    public function __construct()
     {
-        $this->links = $links ?? '';
+        //
     }
 
     /**
@@ -23,6 +21,6 @@ class search_bar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.search_bar');
+        return view('components.shared.pagination');
     }
 }

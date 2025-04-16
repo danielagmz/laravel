@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\allArticlesController;
-use App\Http\Controllers\ArticlesController;
-use App\Http\Controllers\createController;
-use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\deleteController;
-use App\Http\Controllers\homeController;
-use App\Http\Controllers\updateController;
+use App\Http\Controllers\articles\allArticlesController;
+use App\Http\Controllers\articles\articlesController;
+use App\Http\Controllers\articles\createController;
+use App\Http\Controllers\users\dashboardController;
+use App\Http\Controllers\articles\deleteController;
+use App\Http\Controllers\users\homeController;
+use App\Http\Controllers\articles\updateController;
 
 Route::get('/', function () {
     return view('landing');
@@ -25,6 +25,6 @@ Route::get('/update', [updateController::class, 'index'])->name('update');
 Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
 Route::get('/deleting/{id}', [deleteController::class, 'index'])->name('deleting');
 Route::get('/updating/{id}', [updateController::class, 'index'])->name('updating');
-Route::get('/reading/{id}', [ArticlesController::class, 'index'])->name('reading');
+Route::get('/reading/{id}', [articlesController::class, 'index'])->name('reading');
 
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

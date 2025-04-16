@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\users;
 
 use Illuminate\Http\Request;
 
-class homeController extends Controller
+class homeController
 {
     public function index(){
         return view('home');

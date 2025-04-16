@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\articles;
 
 use Illuminate\Http\Request;
 
-class createController extends Controller
+class createController
 {
     public function index()
     {
