@@ -10,9 +10,22 @@ class articlesController
     /**
      * Display a listing of the resource.
      */
-    public static function all()
+    public static function all($limit = 4, $order = 'asc', $search = null)
     {
-        $articles = Article::with('author')->paginate(4);
+        $articles = Article::with('author')
+            ->orderBy('title', $order)
+            ->where('title', 'like', '%' . $search . '%')
+            ->paginate($limit);
+        return $articles;
+    }
+
+    public static function allByAuthor($id, $limit = 4, $order = 'asc', $search = null)
+    {
+        $articles = Article::with('author')
+            ->where('author_id', $id)
+            ->orderBy('title', $order)
+            ->where('title', 'like', '%' . $search . '%')
+            ->paginate($limit);
         return $articles;
     }
 

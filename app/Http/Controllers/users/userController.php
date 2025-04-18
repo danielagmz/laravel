@@ -7,8 +7,11 @@ use App\Models\User;
 
 class userController
 {
-    public function getUsernamebyId($id){
-        $user = User::find($id);
-        return $user->username;
+    public static function all($limit = 4, $order = 'desc', $search = null) {
+        $users = User::where('username', 'like', '%' . $search . '%')
+        ->orderBy('username', $order)
+        ->paginate($limit);
+        return $users;
     }
+
 }

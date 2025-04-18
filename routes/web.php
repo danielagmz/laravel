@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\adminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\articles\allArticlesController;
 use App\Http\Controllers\articles\articlesController;
@@ -13,7 +14,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::view('/admin', 'admin.admin')->name('admin');
+Route::get('/admin', [adminController::class, 'index'])->name('admin');
 Route::view('/register', 'auth.register')->name('register');
 Route::view('/login', 'auth.login')->name('login');
 

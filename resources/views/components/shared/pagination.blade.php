@@ -1,3 +1,8 @@
+@php
+    $limit = request('limit', 4);
+    $search = request('search', '');
+@endphp
+
 @if ($paginator->hasPages())
     <div class="paginacion__links">
         {{-- Botón "anterior" --}}
@@ -6,7 +11,7 @@
             <i class="fi fi-rr-caret-left"></i>
             </a>
         @else
-            <a role="button" aria-label="previous page" href="{{ $paginator->previousPageUrl() }}" class="button--page">
+            <a role="button" aria-label="previous page" href="{{ $paginator->previousPageUrl() }}&limit={{ $limit }}&search={{ $search }}" class="button--page">
             <i class="fi fi-rr-caret-left"></i>
             </a>
         @endif
@@ -21,7 +26,7 @@
                     @if ($page == $paginator->currentPage())
                         <a class="num--pages page--active">{{ $page }}</a>
                     @else
-                        <a class="num--pages" href="{{ $url }}">{{ $page }}</a>
+                        <a class="num--pages" href="{{ $url }}&limit={{ $limit }}&search={{ $search }}">{{ $page }}</a>
                     @endif
                 @endforeach
             @endif
@@ -29,7 +34,7 @@
 
         {{-- Botón "siguiente" --}}
         @if ($paginator->hasMorePages())
-            <a role="button" aria-label="next page" href="{{ $paginator->nextPageUrl() }}" class="button--page button--page--right">
+            <a role="button" aria-label="next page" href="{{ $paginator->nextPageUrl() }}&limit={{ $limit }}&search={{ $search }}" class="button--page button--page--right">
                 <i class="fi fi-rr-caret-right"></i>
             </a>
         @else
