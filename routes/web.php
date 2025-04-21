@@ -9,14 +9,15 @@ use App\Http\Controllers\users\dashboardController;
 use App\Http\Controllers\articles\deleteController;
 use App\Http\Controllers\users\homeController;
 use App\Http\Controllers\articles\updateController;
+use App\Http\Controllers\auth\loginController;
+use App\Http\Controllers\auth\registerController;
+use App\Http\Controllers\landingController;
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [landingController::class, 'index'])->name('landing');
 
 Route::get('/admin', [adminController::class, 'index'])->name('admin');
-Route::view('/register', 'auth.register')->name('register');
-Route::view('/login', 'auth.login')->name('login');
+Route::get('/register', [registerController::class, 'index'])->name('register');
+Route::get('/login', [loginController::class, 'index'])->name('login');
 
 Route::get('/all', [allArticlesController::class, 'index'])->name('all');
 Route::get('/home', [homeController::class, 'index'])->name('home');

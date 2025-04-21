@@ -32,48 +32,46 @@ class articlesController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($title, $content,$author_id,$shared = false)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        $article = Article::create([
+            'title' => $title,
+            'content' => $content,
+            'shared' => $shared,
+            'author_id' => $author_id
+        ]);
+        return $article;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Article $article)
-    {
-        //
+        $article = Article::find($id);
+        return $article;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update($id, $title, $content, $shared)
     {
-        //
+        $article = Article::find($id);
+        $article->title = $title;
+        $article->content = $content;
+        $article->shared = $shared;
+        $article->save();
+        return $article;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+        return $article;
     }
 }

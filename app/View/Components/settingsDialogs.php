@@ -6,18 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Article extends Component
+class settingsDialogs extends Component
 {
-    public $article;
-    public $anonymous = false;
-    public $onclick = null;
     /**
      * Create a new component instance.
      */
-    public function __construct($article, $onclick = null)
+    public function __construct()
     {
-        $this->article = $article;
-        $this->onclick = $onclick;
+        //
     }
 
     /**
@@ -25,6 +21,6 @@ class Article extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.article');
+        return view('components.settings-dialogs');
     }
 }

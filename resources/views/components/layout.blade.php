@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    @stack('scripts')
 </head>
 
 <body class="{{ $bodyClass }}">
