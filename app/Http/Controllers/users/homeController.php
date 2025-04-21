@@ -4,26 +4,23 @@ namespace App\Http\Controllers\users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\articles\articlesController;
+use App\Traits\paginable;
 use Illuminate\Pagination\Paginator;
 
 class homeController
 {
+    use paginable;
     public function index(Request $request){
-        $limit = $request->get('limit', 4);
-        $page = $request->get('page', 1);
-        $order = $request->get('order', 'desc');
+        $pagination = $this->resolvePagination($request);
 
-        Paginator::currentPageResolver(function () use ($page) {
-            return $page;
-        });
+        $articles = articlesController::all(
+            $pagination['limit'], 
+            $pagination['order'], 
+            $pagination['search']
+        );
 
-        $articles = articlesController::all($limit, $order);
-
-        if ($page > $articles->lastPage()) {
-            $params = $request->query();
-            $params['page'] = 1;
-
-            return redirect()->to(url()->current() . '?' . http_build_query($params));
+        if ($redirectResponse = $this->handleOverflow($request, $articles)) {
+            return $redirectResponse;
         }
 
         return view('home', compact('articles'));

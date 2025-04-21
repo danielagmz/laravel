@@ -1,4 +1,5 @@
 <x-layout>
+    @vite(['resources/js/showme.js'])
 <main class="content">
     <div class="content__title">Logar-se</div>
     <div class="content__body content__body--30W">

@@ -1,4 +1,5 @@
 <x-layout>
+    @vite(['resources/js/showme.js'])
   <main class="content settings">
     <div class="settings-banner">
     </div>

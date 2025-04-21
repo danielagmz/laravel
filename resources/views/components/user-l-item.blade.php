@@ -1,7 +1,7 @@
 <tr class="user_row" data-id="{{ $user->id }}">
     <td class="user_name">
         <div class="user_image">
-            <img src="{{ $user->image }}" alt="user">
+            <img src="{{ (!$user->image) ? asset('assets/cats-nose.webp') : $user->image }}" alt="user">
         </div>
         {{ $user->username }}
     </td>
