@@ -153,3 +153,55 @@
         }
     }
 }
+
+.form-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border: 1px solid #737373;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    position: relative;
+    text-align: left;
+
+}
+
+/* icono del area de mensajes */
+.form-info::after {
+    content: '';
+    font-size: 2rem;
+    z-index: 2;
+    position: absolute;
+    top: -1.4rem;
+    right: -1rem;
+}
+
+.form-info--error::after {
+    content: '⚠️';
+}
+
+.form-info--success::after {
+    content: '✅';
+}
+
+.form-info--warning::after {
+    content: 'ℹ';
+    background-color: rgb(181, 181, 181);
+    padding: 0.1rem 0.9rem;
+    border-radius: 10px;
+    right: -1rem;
+    top: -0.7rem;
+}
+
+/* colores de mensaje */
+.form-info--error {
+    background-color: rgba(212, 22, 22, 0.109);
+}
+
+.form-info--warning {
+    background-color: rgba(95, 95, 95, 0.109);
+}
+
+.form-info--success {
+    background-color: rgba(22, 212, 22, 0.109);
+}

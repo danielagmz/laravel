@@ -32,7 +32,7 @@ class articlesController
     /**
      * Show the form for creating a new resource.
      */
-    public function create($title, $content,$author_id,$shared = false)
+    public static function create($title, $content,$author_id,$shared = false)
     {
         $article = Article::create([
             'title' => $title,

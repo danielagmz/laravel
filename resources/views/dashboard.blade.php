@@ -15,16 +15,16 @@
                     <div class="profile__info-group">
                         <label class="profile__label content__title" for="username"><i class="fi fi-rr-circle-user"></i>
                             Usuari</label>
-                        <input class="profile__input" type="text" value="" name="username" id="username">
+                        <input class="profile__input" type="text" value="{{ $user->username }}" name="username" id="username">
                     </div>
                     <div class="profile__info-group">
                         <label class="profile__label content__title" for="email"><i class="fi fi-rr-at"></i>
                             Email</label>
-                        @if (!isset($_SESSION['SocialProvider']))
-                            <input class="profile__input" type="email" value="" name="email" id="email">
+                        @if (!$user->SocialProvider)
+                            <input class="profile__input" type="email" value="{{ $user->email }}" name="email" id="email">
                         @endif
-                        @if (isset($_SESSION['SocialProvider']))
-                            <input class="profile__input disabled--opacity" type="email" value="" name="email"
+                        @if ($user->SocialProvider)
+                            <input class="profile__input disabled--opacity" type="email" value="{{ $user->email }}" name="email"
                                 id="email" readonly>
                         @endif
                     </div>
@@ -34,7 +34,7 @@
                     <label class="profile__label content__title" for="bio"><i class="fi fi-rr-info"></i>
                         Descripció</label>
                     <textarea class="profile__textarea bio__textarea" name="bio" id="bio"
-                        placeholder="Escriu una cosa interessant sobre tu.."></textarea>
+                        placeholder="Escriu una cosa interessant sobre tu..">{{ $user->bio }}</textarea>
 
                 </div>
                 <div class="profile__actions">

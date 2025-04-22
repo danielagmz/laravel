@@ -6,23 +6,23 @@
         <form class="form article" action="{{ route('register') }}" method="POST" >
             <div class="form__group">
                 <label class="form__label" for="username">Nom d'usuari</label>
-                <input class="form__input" value="" placeholder="patato123" type="text" name="username" id="username" required />
+                <input class="form__input" value="{{ old('username') }}" placeholder="patato123" type="text" name="username" id="username" required />
             </div>
             <div class="form__group">
                 <label class="form__label" for="email">email</label>
-                <input class="form__input" value="" placeholder="patato123@correo.com" type="email" name="email" id="email" required />
+                <input class="form__input" value="{{ old('email') }}" placeholder="patato123@correo.com" type="email" name="email" id="email" required />
             </div>
             <div class="form__group">
                 <label class="form__label" for="password">Contrasenya</label>
                 <div class="input__group--pass">
-                    <input class="form__input" value="" placeholder="••••••••" type="password" name="password" id="password" required />
+                    <input class="form__input" value="{{ old('password') }}" placeholder="••••••••" type="password" name="password" id="password" required />
                     <i tabindex="0" class="fi fi-rr-eye showme"></i>
                 </div>
             </div>
             <div class="form__group">
-                <label class="form__label" for="verifypassword">Confirma la contrasenya</label>
+                <label class="form__label" for="password_confirmation">Confirma la contrasenya</label>
                 <div class="input__group--pass">
-                    <input class="form__input" placeholder="••••••••" type="password" name="verifypassword" id="verifypassword" required />
+                    <input class="form__input"  placeholder="••••••••" type="password" name="password_confirmation" id="verifypassword" required />
                     <i tabindex="0" class="fi fi-rr-eye showme"></i>
                 </div>
             </div>

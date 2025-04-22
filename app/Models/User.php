@@ -2,24 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $fillable = [
         'username',
         'email',
         'bio',
         'avatar',
-        'banner'
+        'banner',
+        'is_admin',
+        'socialProvider',
+        'id'
+        
     ];
 
     protected $hidden = [
-        'password',
-        'id',
-        'is_admin',
-        'socialProvider'
+        'password'
     ];
     
     public function articles(): HasMany
@@ -30,5 +31,10 @@ class User extends Model
     public function tokens(): HasMany
     {
         return $this->hasMany(Token::class, 'user_id', 'id');
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'username';
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\articles\updateController;
 use App\Http\Controllers\auth\loginController;
 use App\Http\Controllers\auth\registerController;
 use App\Http\Controllers\landingController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [landingController::class, 'index'])->name('landing');
 
@@ -19,14 +20,23 @@ Route::get('/admin', [adminController::class, 'index'])->name('admin');
 Route::get('/register', [registerController::class, 'index'])->name('register');
 Route::get('/login', [loginController::class, 'index'])->name('login');
 
-Route::get('/all', [allArticlesController::class, 'index'])->name('all');
-Route::get('/home', [homeController::class, 'index'])->name('home');
-Route::get('/create', [createController::class, 'index'])->name('create');
-Route::get('/delete', [deleteController::class, 'index'])->name('delete');
-Route::get('/update', [updateController::class, 'index'])->name('update');
-Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
-Route::get('/deleting/{id}', [deleteController::class, 'index'])->name('deleting');
-Route::get('/updating/{id}', [updateController::class, 'index'])->name('updating');
-Route::get('/reading/{id}', [articlesController::class, 'index'])->name('reading');
+Route::middleware('auth')->group(function () {
+  Route::get('/all', [allArticlesController::class, 'index'])->name('all');
+  Route::get('/home', [homeController::class, 'index'])->name('home');
+  Route::get('/create', [createController::class, 'index'])->name('create');
+  Route::get('/delete', [deleteController::class, 'index'])->name('delete');
+  Route::get('/update', [updateController::class, 'index'])->name('update');
+  Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
+  Route::get('/deleting/{id}', [deleteController::class, 'index'])->name('deleting');
+  Route::get('/updating/{id}', [updateController::class, 'index'])->name('updating');
+  Route::get('/reading/{id}', [articlesController::class, 'index'])->name('reading');
+  Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+  Route::post('/create', [createController::class, 'store'])->name('create');
+});
+Route::post('/login', [loginController::class, 'login'])->name('login');
+Route::post('/register', [registerController::class, 'register'])->name('register');
+
+Route::get('/ping', function () {
+  return Auth::check() ? Auth::user() : 'No hay sesión';
+})->middleware('web');
