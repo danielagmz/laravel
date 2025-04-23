@@ -5,12 +5,14 @@ namespace App\Http\Controllers\articles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\articles\articlesController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller;
 
-class createController
+class createController extends Controller
 {
     public function index()
     {
-        return view('create');
+        $user = Auth::user();
+        return view('create', compact('user'));
     }
 
     public function store(Request $request)
@@ -20,16 +22,16 @@ class createController
             'content' => 'required|string|max:2504',
         ]);
 
-        if(Auth::user()->id){
-           $article = articlesController::create(
-            $request->title,
-            $request->content,
-            Auth::user()->id
-        ); 
-        }else{
+        if (Auth::user()->id) {
+            $article = articlesController::create(
+                $request->title,
+                $request->content,
+                Auth::user()->id
+            );
+        } else {
             return back()->with('error', 'You must be logged in to create an article.');
         }
-        
+
 
         if ($article) {
             return back()->with('success', 'Article created successfully.');

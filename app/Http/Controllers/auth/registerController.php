@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\users\userController;
 
 class registerController
 {
@@ -13,22 +13,27 @@ class registerController
     }
 
     public function register(Request $request){
-        $validator = Validator::make($request->all(), [
+        $validated = $request->validate( [
             'username' => 'required|string',
+            'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        $user = userController::create(
+            $validated['username'], 
+            $validated['email'], 
+            $validated['password']
+        );
 
-        $credentials = $request->only('username', 'password');
+        Auth::login($user);
 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            $request->session()->regenerate();
+        // if (Auth::attempt($credentials, $request->filled('remember'))) {
+        //     $request->session()->regenerate();
 
-            return redirect()->intended('/home');
-        }
+        //     return redirect()->intended('/home');
+        // }
+
+        return redirect('/home');
 
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class userController
 {
@@ -44,6 +45,15 @@ class userController
     public static function setBanner($id, $banner) {
         $user = User::find($id);
         $user->banner = $banner;
+        $user->save();
+        return $user;
+    }
+
+    public static function create($username, $email, $password) {
+        $user = new User;
+        $user->username = $username;
+        $user->email = $email;
+        $user->password = Hash::make($password);
         $user->save();
         return $user;
     }

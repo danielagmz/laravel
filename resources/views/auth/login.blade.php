@@ -7,14 +7,14 @@
                 @csrf
                 <div class="form__group">
                     <label class="form__label" for="username">Usuari</label>
-                    <input class="form__input" value="{{ old('username') }}" placeholder="patato123" type="text" name="username"
-                        id="username" required />
+                    <input class="form__input" value="{{ old('username') }}" placeholder="patato123" type="text"
+                        name="username" id="username" required />
                 </div>
                 <div class="form__group">
                     <label class="form__label" for="password">Contrasenya</label>
                     <div class="input__group--pass">
-                        <input class="form__input" value="{{ old('password') }}" placeholder="••••••••" type="password" name="password"
-                            id="password" required />
+                        <input class="form__input" value="{{ old('password') }}" placeholder="••••••••" type="password"
+                            name="password" id="password" required />
                         <i tabindex="0" class="fi fi-rr-eye showme"></i>
                     </div>
 
@@ -35,9 +35,17 @@
                     </label>
 
                 </div>
-                @if (session('error'))
+                @if (session('show_captcha'))
+                    @push('scripts')
+                        {!! NoCaptcha::renderJs() !!}
+                    @endpush
+                    {!! NoCaptcha::display() !!}
+                @endif
+                @if ($errors->any())
                     <div class="form-info form-info--error">
-                        {!! session('error') !!}
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
                     </div>
                 @endif
                 <div class="form__group">

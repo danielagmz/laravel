@@ -1,4 +1,5 @@
 <x-layout>
+  @vite(['resources/js/delete.js'])
   <main class="content">
     <div class="content__title">Selecciona l'article per esborrar</div>
     <x-shared.search_bar :links="$articles->links('components.shared.pagination')"></x-shared.search_bar>

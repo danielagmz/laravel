@@ -5,14 +5,14 @@
                 <i class="fi fi-rr-home"></i>
             </div>
         </a>
-
+        @if (Auth::user()->is_admin)
         <a id="admin" class="menu__item {{ request()->routeIs('admin') ? 'link--active' : '' }}"
             href="{{ route('admin') }}">
             <div class="menu__item-link">
                 <i class="fi fi-rr-users-gear"></i>
             </div>
         </a>
-
+        @endif
         <a id="all" class="menu__item {{ request()->routeIs('all') ? 'link--active' : '' }}"
             href="{{ route('all') }}">
             <div class="menu__item-link">
@@ -48,10 +48,13 @@
             </div>
         </a>
 
-        <a class="button--logout menu__item cursor--pointer" href="{{ route('logout') }}">
-            <div class="menu__item ">
-                <i class="fi fi-rr-sign-out-alt"></i>
-            </div>
-        </a>
+        <form action="{{ route('logout') }}" class="cursor--pointer" method="post">
+            @csrf
+            <button type="submit" class="button--logout menu__item">
+                <div  class="menu__item ">
+                    <i class="fi fi-rr-sign-out-alt"></i>
+                </div>
+            </button>
+        </form>
     </aside>
 </div>

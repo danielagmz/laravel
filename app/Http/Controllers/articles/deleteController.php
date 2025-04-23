@@ -3,11 +3,41 @@
 namespace App\Http\Controllers\articles;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\articles\articlesController;
+use Illuminate\Support\Facades\Auth;
+use App\Traits\paginable;
+
 
 class deleteController
 {
-    public function index(){
-        $articles = articlesController::all();
+    use paginable;
+    public function index(Request $request){
+        $pagination = $this->resolvePagination($request);
+
+        $articles = articlesController::allByAuthor(
+            Auth::user()->id,
+            $pagination['limit'], 
+            $pagination['order'], 
+            $pagination['search']
+        );
+
+        if ($redirectResponse = $this->handleOverflow($request, $articles)) {
+            return $redirectResponse;
+        }
         return view('delete', compact('articles'));
+    }
+
+    public function deleting(Request $request,$id){
+        $article = articlesController::show($id);
+
+        return view('deleting', compact('article'));
+    }
+
+    public function delete(Request $request,$id){
+        $article = articlesController::destroy($id);
+        if($article){
+            return redirect()->route('home');
+        }
+        return back()->with('error', 'Article no trobat');
     }
 }

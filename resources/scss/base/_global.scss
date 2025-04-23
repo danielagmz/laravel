@@ -116,3 +116,11 @@
     align-items: center;
     text-align: center;
 }
+
+.disabled {
+    pointer-events: none;
+    cursor: none;
+}
+.disabled--opacity{
+    opacity: 0.6;
+}

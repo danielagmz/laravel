@@ -5,7 +5,7 @@ namespace App\Http\Controllers\users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\articles\articlesController;
 use App\Traits\paginable;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class homeController
 {
@@ -13,7 +13,8 @@ class homeController
     public function index(Request $request){
         $pagination = $this->resolvePagination($request);
 
-        $articles = articlesController::all(
+        $articles = articlesController::allByAuthor(
+            Auth::user()->id,
             $pagination['limit'], 
             $pagination['order'], 
             $pagination['search']

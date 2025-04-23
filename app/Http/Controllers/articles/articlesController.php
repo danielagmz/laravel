@@ -46,7 +46,7 @@ class articlesController
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public static function show($id)
     {
         $article = Article::find($id);
         return $article;
@@ -55,7 +55,7 @@ class articlesController
     /**
      * Update the specified resource in storage.
      */
-    public function update($id, $title, $content, $shared)
+    public static function update($id, $title, $content, $shared=false)
     {
         $article = Article::find($id);
         $article->title = $title;
@@ -68,7 +68,7 @@ class articlesController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         $article = Article::find($id);
         $article->delete();

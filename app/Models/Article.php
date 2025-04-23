@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Article extends Model
 {
     protected $fillable = [
-        'title', 'content', 'image','shared'
+        'title', 'content', 'image','shared','author_id'
     ];
 
     protected $hidden = [
         'created_at', 'updated_at',
-        'id', 'author_id'	
+        'id', 	
     ];
 
     public function author(): BelongsTo

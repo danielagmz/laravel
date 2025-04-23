@@ -10,13 +10,15 @@ class form extends Component
 
 {
     public $type;
+    public $article;
     /**
      * Create a new component instance.
      */
-    public function __construct($type = '')
+    public function __construct($type = '',$article = null)
 
     {
         $this->type = $type;
+        $this->article = $article;
     }
 
     /**
