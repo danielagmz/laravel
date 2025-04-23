@@ -1,9 +1,12 @@
 <x-layout>
+    @vite(['resources/js/dialog.js'])
+    
     <dialog class="dialog dialog__delete-user">
         <div class="dialog__content">
             <button class="dialog__close"><i class="fi fi-rr-cross"></i></button>
             <div class="content__body">
                 <form id="deleteUserForm" method="post" class="form article" enctype="multipart/form-data">
+                    @csrf
                     <div class="content__title">Estas segur?</div>
                     <input type="hidden" id="user-id" name="user-id" class="form__input">
                     <div id="deleteUserResponse" class="response-container"></div>

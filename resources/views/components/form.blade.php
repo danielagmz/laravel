@@ -59,4 +59,10 @@
         @endif
         <input type="submit" value="Modificar" class="form__button form__button--mark">
     </form>
+
+    @elseif ($type == 'read')
+        <div class="content__title">{{ $article->title ?? 'LLegint l\'article' }}</div>
+        <div class="content__body reading__body">
+                <p class="article__content">{{ $article->content ?? '' }}</p>
+        </div>
 @endif

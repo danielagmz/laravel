@@ -11,6 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias(['adminOnly' => \App\Http\Middleware\AdminOnly::class]);
         $middleware->append(\App\Http\Middleware\BodyClassMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {

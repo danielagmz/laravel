@@ -124,3 +124,10 @@
 .disabled--opacity{
     opacity: 0.6;
 }
+
+.recover {
+    font-size: 14px;
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+}

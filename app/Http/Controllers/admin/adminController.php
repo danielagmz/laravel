@@ -14,8 +14,8 @@ class adminController
     {
         $pagination = $this->resolvePagination($request);
         $users = userController::all(
-            $pagination['limit'], 
-            $pagination['order'], 
+            $pagination['limit'],
+            $pagination['order'],
             $pagination['search']
         );
 
@@ -24,5 +24,12 @@ class adminController
         }
 
         return view('admin.admin', compact('users'));
+    }
+
+    public function destroyUser($id)
+    {
+        $user = userController::destroy($id);
+        return response('<div class="form-info form-info--success profile-info">Cuenta eliminada</div>', 200)
+            ->header('Content-Type', 'text/html');
     }
 }

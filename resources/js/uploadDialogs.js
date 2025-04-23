@@ -5,6 +5,7 @@ function initDialog({ dialogSelector, buttonClass, formId, submitUrl, responseCo
     const responseContainer = document.getElementById(responseContainerId);
     const avatarInput = form.querySelector('input[type="file"]');
     const previewContainer = document.getElementById(previewContainerId);
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     let cropper;
     let croppedBlob;
 
@@ -93,6 +94,9 @@ function initDialog({ dialogSelector, buttonClass, formId, submitUrl, responseCo
                 try {
                     const response = await fetch(submitUrl, {
                         method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': token
+                        },
                         body: formData,
                     });
 
@@ -122,9 +126,9 @@ initDialog({
     dialogSelector: '.dialog__upload--avatar', 
     buttonClass: 'edit-avatar__button', 
     formId: 'uploadAvatarForm', 
-    submitUrl: 'index.php?action=upload__avatar', 
+    submitUrl: '/update/avatar', 
     responseContainerId: 'uploadAvatarResponse',
-    redirect: 'index.php?action=update_info',
+    redirect: '/dashboard',
     cropWidth: 120,
     cropHeight: 120,
     previewContainerId: 'avatarPreviewContainer'
@@ -134,10 +138,11 @@ initDialog({
     dialogSelector: '.dialog__upload--banner', 
     buttonClass: 'edit-banner__button', 
     formId: 'uploadBannerForm', 
-    submitUrl: 'index.php?action=upload__banner',
-    redirect: 'index.php?action=update_info', 
+    submitUrl: '/update/banner',
+    redirect: '/dashboard', 
     responseContainerId: 'uploadBannerResponse',
     cropWidth: 1024,
     cropHeight: 119,
     previewContainerId: 'bannerPreviewContainer'
+
 });

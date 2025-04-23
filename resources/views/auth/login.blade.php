@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="form__group center">
-                    <a aria-label="recuperar contrasenya" class="recover" href="index.php?action=recover_account">He
+                    <a aria-label="recuperar contrasenya" class="recover" href="{{ route('forgotPassword') }}">He
                         oblidat la contrasenya</a>
                 </div>
             </form>

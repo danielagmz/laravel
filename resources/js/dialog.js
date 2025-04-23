@@ -16,6 +16,8 @@ function initDialog({ dialogSelector, buttonIdentifier, formId, submitUrl, respo
     const dialogClose = dialog.querySelector('.dialog__close');
     const form = document.getElementById(formId);
     const responseContainer = document.getElementById(responseContainerId);
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
     if (!dialog || !dialogClose || !form || !responseContainer) {
         console.error(`Elementos necesarios no encontrados. Verifica los selectores proporcionados: 
         dialog: ${dialog}, 
@@ -60,6 +62,9 @@ function initDialog({ dialogSelector, buttonIdentifier, formId, submitUrl, respo
         try {
             const response = await fetch(submitUrl, {
                 method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
                 body: formData,
             });
 
@@ -84,7 +89,7 @@ if (document.querySelector('.dialog--change-pass')) {
         dialogSelector: '.dialog--change-pass',
         buttonIdentifier: '.change-password__button',
         formId: 'changePasswordForm',
-        submitUrl: 'index.php?action=change_password',
+        submitUrl: '/update/password',
         responseContainerId: 'responseContainer'
     });
 }
@@ -93,15 +98,16 @@ if (document.querySelector('.dialog--delete-account')) {
         dialogSelector: '.dialog--delete-account',
         buttonIdentifier: '.delete-account__button',
         formId: 'deleteAccountForm',
-        submitUrl: 'index.php?action=delete__account',
+        submitUrl: '/delete/account',
         responseContainerId: 'responseDelete',
-        redirect: 'index.php?action=read'
+        redirect: '/'
     });
 }
 if (document.querySelector('.dialog__delete-user')) {
     const dialogSelector = '.dialog__delete-user';
     const formId = 'deleteUserForm';
     const responseContainerId = 'deleteUserResponse';
+    
 
     // Agregar eventos a cada botón de usuario
     document.querySelectorAll('button[id^="user-"]').forEach((button) => {
@@ -109,7 +115,7 @@ if (document.querySelector('.dialog__delete-user')) {
             const id = button.id.split('-')[1]; // Obtener el ID del usuario
 
             // Configurar la URL dinámica para la solicitud
-            const submitUrl = `index.php?action=delete__user`;
+            const submitUrl = `/delete/user/${id}`;
 
             // Configurar dinámicamente el campo oculto del formulario
             const hiddenInput = document.querySelector(`#user-id`);
@@ -124,7 +130,7 @@ if (document.querySelector('.dialog__delete-user')) {
                 formId,
                 submitUrl,
                 responseContainerId,
-                redirect: 'index.php?action=admin'
+                redirect: '/admin'
             });
 
             // Mostrar el diálogo

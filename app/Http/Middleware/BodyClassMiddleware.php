@@ -19,6 +19,7 @@ class BodyClassMiddleware
             $request->is('/') => 'anonimo',
             $request->is('register') => 'anonimo register',
             $request->is('login') => 'anonimo',
+            $request->is('forgot') => 'anonimo',
             $request->is('delete') => 'delete',
             $request->is('home') => 'read',
             $request->is('all') => 'read',
@@ -26,7 +27,7 @@ class BodyClassMiddleware
 
         };
 
-        $anonimo = $request->is('/') || $request->is('register') || $request->is('login');
+        $anonimo = $request->is('/') || $request->is('register') || $request->is('login') || $request->is('forgot');
 
         view()->share('bodyClass', $bodyClass,); 
         view()->share('anonimo', $anonimo); 

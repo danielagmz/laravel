@@ -5,27 +5,48 @@
         <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
     @endpush
 
+    @push('styles')
+        @if ($user?->banner)
+            <style>
+                .settings-banner {
+                    background-image: url('{{ asset('storage/' . $user->banner ) }}');
+                }
+            </style>
+        @endif
+
+        @if ($user?->avatar)
+            <style>
+                .settings-banner::after {
+                    background-image: url('{{ asset('storage/' . $user->avatar ) }}');
+                }
+            </style>
+        @endif
+    @endpush
+
     <x-settings-dialogs></x-settings-dialogs>
     <main class="content settings">
         <div class="settings-banner">
         </div>
         <div class="settings-body--bento">
-            <form class=" settings-body__element profile" action="index.php?action=update_info" method="post">
+            <form class=" settings-body__element profile" action="{{ route('updateInfo') }}" method="post">
+                @csrf
                 <div class="profile__info">
                     <div class="profile__info-group">
                         <label class="profile__label content__title" for="username"><i class="fi fi-rr-circle-user"></i>
                             Usuari</label>
-                        <input class="profile__input" type="text" value="{{ $user->username }}" name="username" id="username">
+                        <input class="profile__input" type="text" value="{{ $user->username }}" name="username"
+                            id="username">
                     </div>
                     <div class="profile__info-group">
                         <label class="profile__label content__title" for="email"><i class="fi fi-rr-at"></i>
                             Email</label>
                         @if (!$user->SocialProvider)
-                            <input class="profile__input" type="email" value="{{ $user->email }}" name="email" id="email">
+                            <input class="profile__input" type="email" value="{{ $user->email }}" name="email"
+                                id="email">
                         @endif
                         @if ($user->SocialProvider)
-                            <input class="profile__input disabled--opacity" type="email" value="{{ $user->email }}" name="email"
-                                id="email" readonly>
+                            <input class="profile__input disabled--opacity" type="email" value="{{ $user->email }}"
+                                name="email" id="email" readonly>
                         @endif
                     </div>
                 </div>
@@ -38,6 +59,18 @@
 
                 </div>
                 <div class="profile__actions">
+                    @if ($errors->any())
+                        <div class="form-info form-info--error profile-info">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="form-info form-info--success profile-info">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <input type="submit" value="Guardar" class="form__button settings__button settings__button--save">
                 </div>
             </form>
@@ -68,12 +101,12 @@
             <div class="settings-body__element delete-account text__align--center">
                 <h1 class="settings-body__element-title delete-account__title content__title"><i
                         class="fi fi-rr-user-xmark"></i> Eliminar compte</h1>
-                @if (!isset($_SESSION['SocialProvider']))
+                @if (!$user->SocialProvider)
                     <button id="delete-account"
                         class="form__button settings__button settings__button--red delete-account__button">Eliminar
                         compte</button>
                 @endif
-                @if (isset($_SESSION['SocialProvider']))
+                @if ($user->SocialProvider)
                     <button class="form__button settings__button settings__button--red delete-SocialUser__button"
                         onclick="location.href='mailto:admin@dgamez.cat?subject=Consulta sobre la eliminació del compte&body=Hola, necessito ajuda amb la meva compte...'">
                         Contacta amb l'admin

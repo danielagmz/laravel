@@ -1,4 +1,5 @@
 <x-layout>
+  @vite(['resources/js/read.js'])
   <main class="content">
     <div class="content__title">Tots els articles</div>
     <x-shared.search_bar :links="$articles->links('components.shared.pagination')"></x-shared.search_bar>

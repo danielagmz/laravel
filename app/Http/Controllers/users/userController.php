@@ -26,25 +26,33 @@ class userController
         return $user;
     }
 
-    public static function update($id, $username, $email, $password) {
+    public static function update($id, $username, $email, $bio=null) {
         $user = User::find($id);
         $user->username = $username;
         $user->email = $email;
-        $user->password = $password;
+        $user->bio = $bio;
         $user->save();
         return $user;
     }
 
-    public static function setAvatar($id, $avatar) {
+    public static function updateAvatar($id, $avatar) {
         $user = User::find($id);
         $user->avatar = $avatar;
         $user->save();
         return $user;
     }
 
-    public static function setBanner($id, $banner) {
+    public static function updateBanner($id, $banner) {
         $user = User::find($id);
         $user->banner = $banner;
+        $user->save();
+        return $user;
+    }
+
+
+    public static function updatePassword($id, $password) {
+        $user = User::find($id);
+        $user->password = Hash::make($password);
         $user->save();
         return $user;
     }

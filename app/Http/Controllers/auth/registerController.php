@@ -27,12 +27,6 @@ class registerController
 
         Auth::login($user);
 
-        // if (Auth::attempt($credentials, $request->filled('remember'))) {
-        //     $request->session()->regenerate();
-
-        //     return redirect()->intended('/home');
-        // }
-
         return redirect('/home');
 
     }

@@ -3,25 +3,26 @@
         <button class="dialog__close"><i class="fi fi-rr-cross"></i></button>
         <div class="content__body">
             <form id="changePasswordForm" method="post" class="form article">
+                @csrf
                 <div class="content__title">Canviar contrasenya</div>
                 <div class="form__group">
                     <label for="oldPassword" class="form__label">Contrasenya actual</label>
                     <div class="input__group--pass">
-                        <input type="password" id="oldPassword" name="oldPassword" class="form__input">
+                        <input type="password" id="oldPassword" name="current_password" class="form__input">
                         <i class="fi fi-rr-eye showme"></i>
                     </div>
                 </div>
                 <div class="form__group">
-                    <label for="newPassword" class="form__label">Contrasenya nova</label>
+                    <label for="new_password" class="form__label">Contrasenya nova</label>
                     <div class="input__group--pass">
-                        <input type="password" id="newPassword" name="newPassword" class="form__input">
+                        <input type="password" id="newPassword" name="new_password" class="form__input">
                         <i class="fi fi-rr-eye showme"></i>
                     </div>
                 </div>
                 <div class="form__group">
                     <label for="verifyPassword" class="form__label">Confirmar contrasenya</label>
                     <div class="input__group--pass">
-                        <input type="password" id="verifyPassword" name="verifyPassword" class="form__input">
+                        <input type="password" id="verifyPassword" name="new_password_confirmation" class="form__input">
                         <i class="fi fi-rr-eye showme"></i>
                     </div>
                 </div>
@@ -37,6 +38,7 @@
         <button class="dialog__close"><i class="fi fi-rr-cross"></i></button>
         <div class="content__body">
             <form id="deleteAccountForm" method="post" class="form article">
+                @csrf
                 <div class="content__title center">Estas segur?</div>
                 <div class="form__group">
                     <label for="password" class="form__label">Confirma la teva contrasenya</label>
@@ -56,6 +58,7 @@
         <button class="dialog__close"><i class="fi fi-rr-cross"></i></button>
         <div class="content__body">
             <form id="uploadBannerForm" method="post" class="form article" enctype="multipart/form-data">
+                @csrf
                 <div class="content__title">Cargar Banner</div>
                 <div class="form__group">
                     <input type="file" id="banner" name="banner" class="form__input" accept="image/*">
@@ -76,6 +79,7 @@
         <button class="dialog__close"><i class="fi fi-rr-cross"></i></button>
         <div class="content__body">
             <form id="uploadAvatarForm" method="post" class="form article" enctype="multipart/form-data">
+                @csrf
                 <div class="content__title">Cargar Avatar</div>
                 <div class="form__group">
                     <input type="file" id="avatar" name="avatar" class="form__input" accept="image/*">
