@@ -3,6 +3,7 @@
     <div class="content__title">Recuperar contrasenya</div>
     <div class="content__body">
         <form action="{{ route('forgotPassword') }}" method="post" class="form article">
+            @csrf
             <div class="form__group">
                 <label class="form__label" for="email">Introdueix el teu email:</label>
                 <input class="form__input" value="{{ old('email') }}" placeholder="patato123@correo.com" type="email" name="email" id="email" required />

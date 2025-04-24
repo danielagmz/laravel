@@ -4,6 +4,8 @@ use App\Http\Controllers\admin\adminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\articles\allArticlesController;
 use App\Http\Controllers\articles\articlesController;
+use App\Http\Controllers\auth\SocialiteController;
+use App\Http\Controllers\auth\newPasswordController;
 use App\Http\Controllers\articles\createController;
 use App\Http\Controllers\users\dashboardController;
 use App\Http\Controllers\articles\deleteController;
@@ -18,6 +20,12 @@ use App\Http\Controllers\auth\forgotPasswordController;
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/reading/{id}', [readController::class, 'index'])->name('reading');
 
+Route::get('/auth/google/redirect', [SocialiteController::class, 'redirectToGoogle'])->name('google_social_login');
+Route::get('/auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('/auth/github/redirect', [SocialiteController::class, 'redirectToGitHub'])->name('github_social_login');
+Route::get('/auth/github/callback', [SocialiteController::class, 'handleGitHubCallback'])->name('github.callback');
+
 Route::middleware('guest')->group(function () {
   Route::get('/', [landingController::class, 'index'])->name('landing');
   
@@ -27,6 +35,11 @@ Route::middleware('guest')->group(function () {
   
   Route::post('/login', [loginController::class, 'login'])->name('login')->middleware('throttle:3,1');
   Route::post('/register', [registerController::class, 'register'])->name('register');
+  
+  Route::post('/forgot', [forgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
+  Route::get('password/reset/{token}', [newPasswordController::class, 'index'])->name('password.reset');
+  Route::post('password/reset', [newPasswordController::class, 'reset'])->name('password.update');
+
 });
 
 

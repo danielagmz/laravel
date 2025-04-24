@@ -53,10 +53,10 @@
                     <div class="socialAuthOptions">
                         <a aria-label="Login with Google"
                             class="form__button form__button--mark socialAuth socialAuth__google"
-                            href=" //google_social_login_url() ?>"><i class="fi fi-brands-google"></i></a>
+                            href="{{ route('google_social_login') }}"><i class="fi fi-brands-google"></i></a>
                         <a aria-label="Login with Github"
                             class="form__button form__button--mark socialAuth socialAuth__github"
-                            href=" //github_social_login_url() ?>"><i class="fi fi-brands-github"></i></a>
+                            href="{{ route('github_social_login') }}"><i class="fi fi-brands-github"></i></a>
                     </div>
                 </div>
                 <div class="form__group center">

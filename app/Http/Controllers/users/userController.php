@@ -20,6 +20,11 @@ class userController
         return $user;
     }
 
+    public static function userByEmail($email) {
+        $user = User::where('email', $email)->first();
+        return $user;
+    }
+
     public static function destroy($id) {
         $user = User::find($id);
         $user->delete();

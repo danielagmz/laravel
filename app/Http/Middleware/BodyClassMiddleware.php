@@ -20,6 +20,7 @@ class BodyClassMiddleware
             $request->is('register') => 'anonimo register',
             $request->is('login') => 'anonimo',
             $request->is('forgot') => 'anonimo',
+            $request->is('password/*') => 'anonimo',
             $request->is('delete') => 'delete',
             $request->is('home') => 'read',
             $request->is('all') => 'read',
