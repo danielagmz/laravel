@@ -79,10 +79,10 @@ class socialiteController
                 $socialProvider = $user?->socialProvider;
                 if ($socialProvider === 'google') {
                     $origin = session('oauth_origin', '/login');
-                    return redirect($origin)->withErrors(['email' => "T\'has logat amb google"]);
+                    return redirect($origin)->withErrors(['email' => "T'has logat amb google"]);
                 } elseif ($socialProvider === null) {
                     $origin = session('oauth_origin', '/login');
-                    return redirect($origin)->withErrors(['email' => "T\'has logat amb contrasenya"]);
+                    return redirect($origin)->withErrors(['email' => "T'has logat amb contrasenya"]);
                 }else {
                     Auth::login($user);
                     return redirect('/home');

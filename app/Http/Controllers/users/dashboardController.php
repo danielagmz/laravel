@@ -62,7 +62,7 @@ class dashboardController extends Controller
             );
             if($user){
                 Auth::login($user);
-                return response('<div class="form-info form-info--success profile-info">Avatar modificado</div>', 200)
+                return response('<div class="form-info form-info--success profile-info">Contraseña modificada</div>', 200)
                 ->header('Content-Type', 'text/html');
             }
         }

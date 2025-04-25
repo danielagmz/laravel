@@ -30,12 +30,19 @@ class deleteController
     public function deleting(Request $request,$id){
         $article = articlesController::show($id);
 
+        if($article->author_id != Auth::user()->id){
+            return redirect()->route('delete');
+        }
+
         return view('deleting', compact('article'));
     }
 
     public function delete(Request $request,$id){
         $article = articlesController::destroy($id);
         if($article){
+            if($article->author_id != Auth::user()->id){
+                return redirect()->route('delete');
+            }
             return redirect()->route('home');
         }
         return back()->with('error', 'Article no trobat');

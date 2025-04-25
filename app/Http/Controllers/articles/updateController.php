@@ -31,6 +31,10 @@ class updateController
     public function updating(Request $request,$id)
     {
         $article = articlesController::show($id);
+    
+        if($article->author_id != Auth::user()->id){
+            return redirect()->route('update');
+        }
         return view('updating', compact('article'));
     }
 
@@ -42,6 +46,10 @@ class updateController
         ]);
         $article = articlesController::show($id); 
         if($article){
+            if($article->author_id != Auth::user()->id){
+                return redirect()->route('update');
+            }
+
             $article = articlesController::update(
                 $id,
                 $validated['title'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Http\Controllers\users\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -25,18 +26,18 @@ class loginController
         $key = 'login-attempts:' . $request->ip();
 
         $credentials = $request->only('username', 'password');
-        
+
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             RateLimiter::clear($key);
             session()->forget('show_captcha');
             $request->session()->regenerate();
-            
+
             return redirect()->intended('/home');
         }
         RateLimiter::hit($key, 60);
-        
+
         if (RateLimiter::tooManyAttempts($key, 2)) {
-            session(['show_captcha' => true]); 
+            session(['show_captcha' => true]);
         }
 
         throw ValidationException::withMessages([
@@ -46,11 +47,16 @@ class loginController
 
     public function logout(Request $request)
     {
-        Auth::logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $currentUser = Auth::user();
 
-        return redirect('/');
+        if ($currentUser && userController::removeRememberToken($currentUser->id)) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect('/');
+        }
+
+        return back()->with('error', 'Error al tancar sessió');
     }
 }

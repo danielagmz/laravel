@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,7 @@ class BodyClassMiddleware
             $request->is('login') => 'anonimo',
             $request->is('forgot') => 'anonimo',
             $request->is('password/*') => 'anonimo',
+            $request->is('reading/*') => Auth::check() ? '' : 'anonimo',
             $request->is('delete') => 'delete',
             $request->is('home') => 'read',
             $request->is('all') => 'read',
@@ -28,7 +30,7 @@ class BodyClassMiddleware
 
         };
 
-        $anonimo = $request->is('/') || $request->is('register') || $request->is('login') || $request->is('forgot');
+        $anonimo = $request->is('/') || $request->is('register') || $request->is('login') || $request->is('forgot') || $request->is('password/*');
 
         view()->share('bodyClass', $bodyClass,); 
         view()->share('anonimo', $anonimo); 

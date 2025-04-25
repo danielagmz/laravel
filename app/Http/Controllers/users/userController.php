@@ -5,11 +5,13 @@ namespace App\Http\Controllers\users;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class userController
 {
     public static function all($limit = 4, $order = 'desc', $search = null) {
         $users = User::where('username', 'like', '%' . $search . '%')
+        ->where('id', '!=', Auth::user()->id)
         ->orderBy('username', $order)
         ->paginate($limit);
         return $users;
@@ -29,6 +31,12 @@ class userController
         $user = User::find($id);
         $user->delete();
         return $user;
+    }
+
+    public static function removeRememberToken($id) {
+        $user = User::find($id);
+        $user->remember_token = null;
+        return $user->save();
     }
 
     public static function update($id, $username, $email, $bio=null) {
