@@ -3,7 +3,7 @@
     <main class="content">
         <div class="content__title">Logar-se</div>
         <div class="content__body content__body--30W">
-            <form class="form article" action="{{ route('login') }}" method="POST">
+            <form class="form article" action="{{ route('login.post') }}" method="POST">
                 @csrf
                 <div class="form__group">
                     <label class="form__label" for="username">Usuari</label>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="form__group center">
-                    <a aria-label="recuperar contrasenya" class="recover" href="{{ route('forgotPassword') }}">He
+                    <a aria-label="recuperar contrasenya" class="recover" href="{{ route('forgotPassword.get') }}">He
                         oblidat la contrasenya</a>
                 </div>
             </form>

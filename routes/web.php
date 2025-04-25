@@ -31,10 +31,10 @@ Route::middleware('guest')->group(function () {
   
   Route::get('/register', [registerController::class, 'index'])->name('register');
   Route::get('/login', [loginController::class, 'index'])->name('login');
-  Route::get('/forgot', [forgotPasswordController::class, 'index'])->name('forgotPassword');
+  Route::get('/forgot', [forgotPasswordController::class, 'index'])->name('forgotPassword.get');
   
-  Route::post('/login', [loginController::class, 'login'])->name('login')->middleware('throttle:3,1');
-  Route::post('/register', [registerController::class, 'register'])->name('register');
+  Route::post('/login', [loginController::class, 'login'])->name('login.post')->middleware('throttle:3,1');
+  Route::post('/register', [registerController::class, 'register'])->name('register.post');
   
   Route::post('/forgot', [forgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
   Route::get('password/reset/{token}', [newPasswordController::class, 'index'])->name('password.reset');
@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/all', [allArticlesController::class, 'index'])->name('all');
   Route::get('/home', [homeController::class, 'index'])->name('home');
   Route::get('/create', [createController::class, 'index'])->name('create');
-  Route::post('/create', [createController::class, 'store'])->name('create');
+  Route::post('/create', [createController::class, 'store'])->name('create.post');
   Route::get('/delete', [deleteController::class, 'index'])->name('delete');
   Route::get('/update', [updateController::class, 'index'])->name('update');
   Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
@@ -59,8 +59,8 @@ Route::middleware('auth')->group(function () {
   Route::get('/updating/{id}', [updateController::class, 'updating'])->name('updating');
 
 
-  Route::post('/deleting/{id}', [deleteController::class, 'delete'])->name('deleting');
-  Route::post('/updating/{id}', [updateController::class, 'update'])->name('updating');
+  Route::post('/deleting/{id}', [deleteController::class, 'delete'])->name('deleting.post');
+  Route::post('/updating/{id}', [updateController::class, 'update'])->name('updating.post');
 
   Route::post('/update/info', [dashboardController::class, 'updateInfo'])->name('updateInfo');
 

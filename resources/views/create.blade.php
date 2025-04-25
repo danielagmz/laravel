@@ -2,7 +2,7 @@
     <main class="content">
         <div class="content__title">El teu nou article</div>
         <div class="content__body">
-            <form class="form article" action="{{ route('create') }}" method="POST">
+            <form class="form article" action="{{ route('create.post') }}" method="POST">
                 @csrf
                 <div class="form__group">
                     <label for="title" class="form__label">Titol</label>

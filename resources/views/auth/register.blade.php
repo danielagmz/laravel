@@ -3,7 +3,7 @@
     <main class="content">
         <div class="content__title">Enregistrar-se</div>
         <div class="content__body content__body--30W">
-            <form class="form article" action="{{ route('register') }}" method="POST">
+            <form class="form article" action="{{ route('register.post') }}" method="POST">
                 @csrf
                 <div class="form__group">
                     <label class="form__label" for="username">Nom d'usuari</label>

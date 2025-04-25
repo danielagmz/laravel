@@ -1,5 +1,5 @@
 @if($type == 'delete')
-    <form action="{{ route('deleting', ['id' => $article->id]) }}" method="post" class="form article">
+    <form action="{{ route('deleting.post', ['id' => $article->id]) }}" method="post" class="form article">
         @csrf
         <div class="form__group">
             <label for="title" class="form__label">Titol</label>
@@ -29,7 +29,7 @@
         <input type="submit" value="Esborrar" class="form__button form__button--mark" id="deleteBtn">
     </form>
 @elseif ($type == 'update')
-    <form action="{{ route('updating', ['id' => $article->id]) }}" method="post" class="form article">
+    <form action="{{ route('updating.post', ['id' => $article->id]) }}" method="post" class="form article">
         @csrf
         <div class="form__group">
             <label for="title" class="form__label">Titol</label>
